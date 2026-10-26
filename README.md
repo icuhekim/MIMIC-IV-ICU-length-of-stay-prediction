@@ -193,45 +193,34 @@ SHAP values describe how the fitted model uses each variable and should not be i
 
 ## Streamlit Application
 
-A Streamlit application was developed as part of this capstone project to demonstrate how the trained XGBoost model could be incorporated into an interactive prediction interface.
+This project includes an interactive Streamlit application demonstrating
+machine-learning inference using ICU-related clinical inputs.
 
-The application accepts clinical information from the first 24 hours of an ICU admission and generates an estimated probability of ICU length of stay exceeding 5 days.
+**Research model:** The original project used a tuned XGBoost model
+trained on credentialed-access MIMIC-IV data. Its research results
+are documented above. The original trained model is not distributed.
 
-The prediction framework applies to patients who remain in the ICU at the 24-hour landmark.
+**Public demonstration model:** The Streamlit application uses a
+separate Random Forest trained on 10,000 entirely synthetic observations
+with 28 input features and an artificially generated binary outcome.
 
-**Model availability:** The trained model was developed using credentialed-access MIMIC-IV data and is not distributed in this public repository. The Streamlit application source code is retained to demonstrate the implementation, but running the application requires a compatible trained model file.
+The synthetic model and its reproducible training script are included
+in this repository.
 
-This application is an educational proof of concept. It has not undergone external or prospective clinical validation and must not be used for patient care.
+**Important:** Demonstration scores are not clinically meaningful
+probabilities of prolonged ICU stay. Do not enter real patient
+information or use this application for clinical decisions.
 
----
 ---
 
 ## Project Structure
 
-```text
-Capstone-project/
-│
-├── data/
-│   ├── raw/
-│   ├── interim/
-│   └── processed/
-│
-├── models/
-│   └── prolonged_icu_xgb_pipeline.pkl
-│
-├── src/
-│   ├── app.py
-│   ├── explore.ipynb
-│   └── utils.py
-│
-├── .gitignore
-├── requirements.txt
-└── README.md
-```
-
-Raw MIMIC-derived datasets are excluded from version control because of data-access restrictions.
-
-Trained model files are also excluded from version control in the current repository configuration.
+- `data/` - Local data directories; patient-level data not distributed
+- `models/synthetic_demo_pipeline.pkl` - Synthetic demonstration model
+- `scripts/train_demo_model.py` - Synthetic model training script
+- `src/app.py` - Streamlit application
+- `src/explore.ipynb` - Research notebook
+- `requirements-deploy.txt` - Application dependencies
 
 ---
 
@@ -239,35 +228,25 @@ Trained model files are also excluded from version control in the current reposi
 
 Clone the repository:
 
-```bash
-git clone <repository-url>
-```
+    git clone https://github.com/icuhekim/MIMIC-IV-ICU-length-of-stay-prediction.git
 
-Navigate to the project directory:
+Navigate to the project:
 
-```bash
-cd Capstone-project
-```
+    cd MIMIC-IV-ICU-length-of-stay-prediction
 
-Install the required Python packages:
+Install dependencies:
 
-```bash
-pip install -r requirements.txt
-```
+    pip install -r requirements-deploy.txt
 
-Run the Streamlit application:
+Run the Streamlit demonstration:
 
-```bash
-streamlit run src/app.py
-```
+    streamlit run src/app.py
 
-The trained model file must be available locally at:
+The included synthetic model is loaded automatically.
 
-```text
-models/prolonged_icu_xgb_pipeline.pkl
-```
+To regenerate it:
 
-for the application to run.
+    python scripts/train_demo_model.py
 
 ---
 
