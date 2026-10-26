@@ -1,6 +1,6 @@
 # Predicting Prolonged ICU Length of Stay Using First-24-Hour Clinical Data
 
-**Live interactive demonstration:** https://prolonged-icu-los-predictor.onrender.com/
+**Live synthetic-data demonstration (not for clinical use): https://prolonged-icu-los-predictor.onrender.com/
 
 
 This project develops a machine-learning model to predict whether an ICU stay will exceed 5 days using clinical information available during the first 24 hours of ICU admission.
